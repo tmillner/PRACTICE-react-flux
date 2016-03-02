@@ -1,0 +1,6 @@
+module.exports = {
+	PLAY_TRACK : "PLAY",
+	PAUSE_TRACK : "PAUSE",
+	NEXT_TRACK : "NEXT",
+	PREVIOUS_TRACK : "PREVIOUS"
+};

@@ -25,8 +25,19 @@ gulp.task('copyToDest', () => {
 	gulp.src('./src/assets/**/*.*')
 		.pipe(gulp.dest('dist/assets'));
 });
-
+ 
 let defaultTasklist = ['babel', 'browserify', 'copyToDest']
-gulp.task('default', defaultTasklist, () => {
-	return gulp.watch('src/**/*.*', defaultTasklist);
+gulp.task('watch', defaultTasklist, () => {
+	gulp.watch('/src/**/*.es6', ['babel']);
+	gulp.watch('/src/**/*.*', ['browserify', 'copyToDest']);
 });
+
+gulp.task('default', ['watch']);
+
+//let defaultTasklist = ['babel', 'browserify', 'copyToDest']
+//gulp.task('default', defaultTasklist, () => {
+//	// The below is NOT good bc since babel generates new files
+//	// And the glob is *.*, it will endlessly reparse the 
+//	// 'newly' generate files
+//	return gulp.watch('src/**/*.*', defaultTasklist);
+//});
