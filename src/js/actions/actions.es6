@@ -38,6 +38,34 @@ var MainActions = {
 			track : previousTrack
 		});
 	},
+
+	add(item) {
+		new MainDispatcher().handleTheActions({
+			actionType : MainConstants.ADD_ITEM,
+			item : item
+		});
+	},
+
+	increase(i) {
+		new MainDispatcher().handleTheActions({
+			actionType : MainConstants.INCREASE_ITEM,
+			index : i
+		});
+	},
+
+	remove(i) {
+		new MainDispatcher().handleTheActions({
+			actionType : MainConstants.REMOVE_ITEM,
+			index : i
+		});
+	},
+
+	decrease(i) {
+		new MainDispatcher().handleTheActions({
+			actionType : MainConstants.DECREASE_ITEM,
+			index : i
+		});
+	},
 };
 
 module.exports = MainActions;
