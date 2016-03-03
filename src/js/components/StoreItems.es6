@@ -7,13 +7,7 @@ class StoreItems extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			items : new MainStore().getStoreItems() 
-		}
-		this.stateb = {
-			items : new MainStore().getStoreItems() 
-		}
-		this.statec = {
-			items : new MainStore().getStoreItems() 
+			items : MainStore.getStoreItems() 
 		}
 	}
 
@@ -24,7 +18,7 @@ class StoreItems extends React.Component {
 	// React.createClass. Did you mean to define a state property instead?
 	/*
 	getInitialState() {
-		return { items : new MainStore().getStoreItems() };
+		return { items : MainStore.getStoreItems() };
 	};
 	*/
 

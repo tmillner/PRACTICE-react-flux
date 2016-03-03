@@ -58,11 +58,11 @@ let removeItem = (i) => {
 
 // Click '-' from purchase items
 let decreaseItem = (i) => {
-	if(purchaseItems[i].qty > 0) {
+	if(purchaseItems[i].qty > 1) {
 		purchaseItems[i].qty--;
 	}
 	else {
-		removeItem()
+		removeItem(i);
 	}
 };
 
@@ -80,7 +80,7 @@ let getPurchaseTotal = () => {
 // when they occur, binding our stores to the views
 // Using assign with a prototype is similar to extend 
 // assign(EventEmitter.prototype, { /* Extended methods */})
-export default class MainStore extends EventEmitter {
+class MainStore extends EventEmitter {
 	constructor() {
 		// The following properties listed are NEEDED, won't ref
 		// without
@@ -91,8 +91,7 @@ export default class MainStore extends EventEmitter {
 		this.getStoreItems = this.getStoreItems.bind(this);
 		this.getPurchaseTotal = this.getPurchaseTotal.bind(this);
 
-		this.dispatcherIndex = this.dispatcherIndex();
-		this.addItem = addItem.bind(this);
+		this.dispatcherAction = this.dispatcherAction();
 
 		this.emitChange = this.emitChange.bind(this);
 		this.addChangeListener = this.addChangeListener.bind(this);
@@ -133,14 +132,14 @@ export default class MainStore extends EventEmitter {
 	// Going to change this dispatchAction -> dispatchIndex
 	// https://facebook.github.io/flux/docs/todo-list.html
 	// The prototype already contains this method (can print out)
-	dispatcherIndex() {
+	dispatcherAction() {
 		console.log('in dispatcher!');
 		return MainDispatcher.register((payload) => {
 			let action = payload.action;
 			switch(action.actionType) {
 				case MainConstants.ADD_ITEM :
 					console.log('made it inside of action switch');
-					this.addItem(action.item);
+					addItem(action.item);
 					break;
 				case MainConstants.INCREASE_ITEM :
 					increaseItem(action.index);
@@ -157,3 +156,8 @@ export default class MainStore extends EventEmitter {
 		});
 	};
 };
+// Return ONLY 1 pre-instantiated Store, if we 
+// return the Class and multiple Stores are created
+// on components, upon dispatch, actions are triggered
+// per each component -- multiple times (yikes!)
+export default new MainStore();

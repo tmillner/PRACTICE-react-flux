@@ -9,7 +9,6 @@ import Increase from './Increase.js';
 class StoreCart extends React.Component {
 	constructor() {
 		super();
-		this.mainStore = new MainStore();
 		this.state = {
 			items : []
 		};
@@ -21,10 +20,10 @@ class StoreCart extends React.Component {
 	// This is first invoked by the StoreItems Add
 	componentWillMount() {
 		console.log('Mounted StoreCart items B4:', this.state.items);
-		console.log('Purchase items are ', this.mainStore);
-		this.mainStore.addChangeListener(() => {
+		console.log('Purchase items are ', MainStore);
+		MainStore.addChangeListener(() => {
 			this.setState({
-				items : this.mainStore.getPurchaseItems()
+				items : MainStore.getPurchaseItems()
 			});
 			console.log('Mounted StoreCart items A2 2:', this.state.items);
 		});
@@ -62,7 +61,7 @@ class StoreCart extends React.Component {
 			<tfoot>
 				<tr>
 					<td colSpan='4'> </td>
-					<td>{this.mainStore.getPurchaseTotal}</td>
+					<td>{MainStore.getPurchaseTotal}</td>
 				</tr>
 			</tfoot>
 			</table>);
