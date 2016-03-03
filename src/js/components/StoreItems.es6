@@ -9,6 +9,12 @@ class StoreItems extends React.Component {
 		this.state = {
 			items : new MainStore().getStoreItems() 
 		}
+		this.stateb = {
+			items : new MainStore().getStoreItems() 
+		}
+		this.statec = {
+			items : new MainStore().getStoreItems() 
+		}
 	}
 
 	// NOTE: The method below is a ReactComonent method

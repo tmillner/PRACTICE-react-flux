@@ -1,4 +1,20 @@
 import {Dispatcher} from 'flux';
+import assign from 'react/lib/Object.assign';
+
+// Using assign with a new instance is NOT the same as extend
+// on a class (see commented out of failed attempt)
+export default assign(new Dispatcher(), {
+	handleTheActions(action) {
+		console.log('New action:', action);
+		this.dispatch({
+			source : "MAIN_DISPATCHER",
+			action : action
+		});
+	}
+});
+
+/*
+import {Dispatcher} from 'flux';
 
 export default class MainDispatcher extends Dispatcher {
 	constructor() {
@@ -16,3 +32,4 @@ export default class MainDispatcher extends Dispatcher {
 		});
 	};
 };
+*/

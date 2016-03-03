@@ -37,7 +37,7 @@ let addItem = (storeItem) => {
 		// For each can take an object and the index
 		purchaseItems.forEach((item, i) => {
 			if (item.key === storeItem.key) {
-				addItem(i);
+				increaseItem(i);
 			}
 		});
 	}
@@ -78,7 +78,8 @@ let getPurchaseTotal = () => {
 // With the above functions, these are all changes
 // we thus need to find a way to look for such changes (emit)
 // when they occur, binding our stores to the views
-
+// Using assign with a prototype is similar to extend 
+// assign(EventEmitter.prototype, { /* Extended methods */})
 export default class MainStore extends EventEmitter {
 	constructor() {
 		// The following properties listed are NEEDED, won't ref
@@ -134,7 +135,7 @@ export default class MainStore extends EventEmitter {
 	// The prototype already contains this method (can print out)
 	dispatcherIndex() {
 		console.log('in dispatcher!');
-		return new MainDispatcher().register((payload) => {
+		return MainDispatcher.register((payload) => {
 			let action = payload.action;
 			switch(action.actionType) {
 				case MainConstants.ADD_ITEM :

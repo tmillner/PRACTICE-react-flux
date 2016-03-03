@@ -11,7 +11,7 @@ class StoreCart extends React.Component {
 		super();
 		this.mainStore = new MainStore();
 		this.state = {
-			items : this.mainStore.getPurchaseItems() 
+			items : []
 		};
 	};
 

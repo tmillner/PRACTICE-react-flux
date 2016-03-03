@@ -7,14 +7,14 @@ import MainDispatcher from '../dispatchers/dispatcher.js';
 // When an action is dispatched ALL of the methods are checked
 var MainActions = {
 	play(track) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.PLAY_TRACK,
 			track : track
 		});
 	},
 
 	pause(track) {
-		var m = new MainDispatcher();
+		var m = MainDispatcher;
 		for (let p in m)
 		{
 			console.log(`property ${p}`);
@@ -26,42 +26,42 @@ var MainActions = {
 	},
 
 	next(nextTrack) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.NEXT_TRACK,
 			track : nextTrack
 		});
 	},
 
 	previous(previousTrack) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.PREVIOUS_TRACK,
 			track : previousTrack
 		});
 	},
 
 	add(item) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.ADD_ITEM,
 			item : item
 		});
 	},
 
 	increase(i) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.INCREASE_ITEM,
 			index : i
 		});
 	},
 
 	remove(i) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.REMOVE_ITEM,
 			index : i
 		});
 	},
 
 	decrease(i) {
-		new MainDispatcher().handleTheActions({
+		MainDispatcher.handleTheActions({
 			actionType : MainConstants.DECREASE_ITEM,
 			index : i
 		});
