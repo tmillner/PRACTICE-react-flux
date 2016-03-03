@@ -22,15 +22,12 @@ class StoreCart extends React.Component {
 	componentWillMount() {
 		console.log('Mounted StoreCart items B4:', this.state.items);
 		console.log('Purchase items are ', this.mainStore);
-		this.mainStore.addChangeListener(this._onChange);
-	};
-
-	_onChange() {
-		console.log('Mounted StoreCart items A2 1:', this.state.items);
-		this.setState({
-			items : this.mainStore.getPurchaseItems()
+		this.mainStore.addChangeListener(() => {
+			this.setState({
+				items : this.mainStore.getPurchaseItems()
+			});
+			console.log('Mounted StoreCart items A2 2:', this.state.items);
 		});
-		console.log('Mounted StoreCart items A2 2:', this.state.items);
 	};
 
 	render() {
@@ -45,7 +42,7 @@ class StoreCart extends React.Component {
 				<td>{item.artist} / {item.song}</td>
 				<td>{item.qty}</td>
 				<td><Decrease index={i} /><Increase index={i} /></td>
-				<td>{subtoal}</td>
+				<td>{subtotal}</td>
 			</tr>);
 		});
 
