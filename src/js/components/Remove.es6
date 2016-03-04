@@ -4,7 +4,7 @@ import MainActions from '../actions/actions.js'
 // The button to remove a product 
 class Remove extends React.Component {
 	render() {
-		return <Button />
+		return <Button {...this.props}/>
 	};
 };
 

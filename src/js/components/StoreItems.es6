@@ -34,7 +34,7 @@ class StoreItems extends React.Component {
 			</tr>);
 		});
 
-		return (<table><tbody>{items}</tbody></table>);
+		return (<table className='table table-striped'><tbody>{items}</tbody></table>);
 	};
 };
 

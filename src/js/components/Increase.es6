@@ -4,7 +4,7 @@ import MainActions from '../actions/actions.js'
 // The button to increase the quanty of an item
 class Increase extends React.Component {
 	render() {
-		return <Button />
+		return <Button {...this.props}/>
 	};
 };
 

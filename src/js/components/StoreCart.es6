@@ -3,32 +3,67 @@ import MainStore from '../stores/store.js'
 import Remove from './Remove.js';
 import Decrease from './Decrease.js';
 import Increase from './Increase.js';
+import StoreMixin from './StoreMixin'; // Store as in container
+
+
+// The items in the cart to buy
+// | Remove | Item | Quantity | [Decrease][Increase] | Total |
+const StoreCart = (props) => {
+	let items = props.items.map((item, i) => {
+		let total, subtotal = 0;
+		subtotal = item.cost * item.qty;
+		total += subtotal;
+		// NOTE: the indexes and keys are generated dynamically
+		// based on the array that is created on update
+		return (<tr key={i}>
+			<td><Remove index={i}/></td>
+			<td>{item.artist} / {item.song}</td>
+			<td>{item.qty}</td>
+			<td><Decrease index={i} /><Increase index={i} /></td>
+			<td>{subtotal}</td>
+		</tr>);
+	});
+
+	return (<table>
+		<thead>
+			<tr>
+				<th> Remove </th>
+				<th> Item </th>
+				<th> Quantity </th>
+				<th>  </th>
+				<th> Total </th>
+			</tr>
+		</thead>
+		<tbody>
+			{items}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colSpan='4'> </td>
+				<td style={{color: "white", backgroundColor: "black"}}>{MainStore.getPurchaseTotal().totalCost}</td>
+			</tr>
+		</tfoot>
+	</table>);
+};
+
+// Export the RESULT of calling the function,
+//  the caller can name this module whatever
+export default StoreMixin(StoreCart, {
+	items : MainStore.getPurchaseItems()
+});
+
+/*
+import React from 'react';
+import MainStore from '../stores/store.js'
+import Remove from './Remove.js';
+import Decrease from './Decrease.js';
+import Increase from './Increase.js';
+import StoreMixin from './StoreMixin'; // Store as in container
+
 
 // The items in the cart to buy
 // | Remove | Item | Quantity | [Decrease][Increase] | Total |
 class StoreCart extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			items : []
-		};
-	};
-
-	// We need a way to make this comonent continually update
-	// when changes around the app are done (re setting set state)
-	// Listen by binding event listener
-	// This is first invoked by the StoreItems Add
-	componentWillMount() {
-		console.log('Mounted StoreCart items B4:', this.state.items);
-		console.log('Purchase items are ', MainStore);
-		MainStore.addChangeListener(() => {
-			this.setState({
-				items : MainStore.getPurchaseItems()
-			});
-			console.log('Mounted StoreCart items A2 2:', this.state.items);
-		});
-	};
-
 	render() {
 		let items = this.state.items.map((item, i) => {
 			let total, subtotal = 0;
@@ -61,11 +96,14 @@ class StoreCart extends React.Component {
 			<tfoot>
 				<tr>
 					<td colSpan='4'> </td>
-					<td>{MainStore.getPurchaseTotal}</td>
+					<td style={{color: "white", backgroundColor: "black"}}>{MainStore.getPurchaseTotal().totalCost}</td>
 				</tr>
 			</tfoot>
 			</table>);
 	};
 };
 
-module.exports = StoreCart; 
+export default StoreMixin(StoreCart, {
+	items : MainStore.getPurchaseItems()
+});
+*/

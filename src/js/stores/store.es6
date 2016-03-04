@@ -101,19 +101,19 @@ class MainStore extends EventEmitter {
 	// This NEEDS to be bound! Since it's not an EventEmitter prop
 	// (it just uses emit which is up the prototype stack)
 	emitChange() {
-		this.emit(this.CHANGE);
+		super.emit(this.CHANGE);
 	};
 
 	// Should be triggered on componentWillMount
 	// No need to bind, this is an EventEmitter property
 	addChangeListener(cb) {
-		this.on(this.CHANGE, cb);
+		super.on(this.CHANGE, cb);
 	};
 
 	// Should be triggered on componentWillUnmount
 	// No need to bind, this is an EventEmitter property
 	removeChangeListener(cb) {
-		this.removeListener(this.CHANGE, cb);
+		super.removeListener(this.CHANGE, cb);
 	};
 
 	getPurchaseItems() {
