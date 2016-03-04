@@ -53,17 +53,18 @@ export default StoreMixin(StoreCart, {
 });
 
 /*
-import React from 'react';
-import MainStore from '../stores/store.js'
-import Remove from './Remove.js';
-import Decrease from './Decrease.js';
-import Increase from './Increase.js';
-import StoreMixin from './StoreMixin'; // Store as in container
+NOTE AN alternative to using static components is to create class
+BUT specify the constructor (potential duplication at the cost
+of hashing out the class better)
 
-
-// The items in the cart to buy
-// | Remove | Item | Quantity | [Decrease][Increase] | Total |
 class StoreCart extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			items : []
+		};
+	};
+
 	render() {
 		let items = this.state.items.map((item, i) => {
 			let total, subtotal = 0;
@@ -106,4 +107,5 @@ class StoreCart extends React.Component {
 export default StoreMixin(StoreCart, {
 	items : MainStore.getPurchaseItems()
 });
+
 */
